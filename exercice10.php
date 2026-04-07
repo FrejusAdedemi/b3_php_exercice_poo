@@ -5,6 +5,7 @@
  * Refactorisez ce code en créant une classe ShoppingCart avec des méthodes équivalentes.
  */
 
+/*
 $cart = [];
 
 function addItem(array &$cart, string $name, float $price) {
@@ -29,3 +30,32 @@ addItem($cart, "Livre", 12.5);
 addItem($cart, "Stylo", 2.3);
 displayCart($cart);
 echo "Total : " . getTotal($cart) . " €\n";
+*/
+
+class ShoppingCart {
+    private array $carts = [];
+
+    public function addItem(string $name, float $price): void {
+        $this->carts[] = ['name' => $name, 'price' => $price];
+    }
+
+    public function getTotal(): float {
+        $total = 0;
+        foreach ($this->carts as $cart) {
+            $total += $cart['price'];
+        }
+        return $total;
+    }
+
+    public function displayCart(): void {
+        foreach ($this->carts as $cart) {
+            echo "{$cart['name']} : {$cart['price']} €<br>";
+        }
+    }
+}
+
+$cart = new ShoppingCart();
+$cart->addItem("Livre", 12.5);
+$cart->addItem("Stylo", 2.3);
+$cart->displayCart();
+echo "Total : {$cart->getTotal()} €<br>";

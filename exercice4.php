@@ -16,4 +16,40 @@ enum TaskStatus: string
     case DONE = "terminée";
 }
 
+class Task
+{
+    protected string $title;
+    protected string $description;
+    protected TaskStatus $status;
+
+    public function __construct(string $title, string $description)
+    {
+        $this->title = $title;
+        $this->description = $description;
+        $this->status = TaskStatus::TODO;
+    }
+
+    public function markAsDone(): void
+    {
+        $this->status = TaskStatus::DONE;
+    }
+
+    public function display(): void
+    {
+        echo "Titre: {$this->title}<br>";
+        echo "Description: {$this->description}<br>";
+        echo "Status: {$this->status->value}<br>";
+    }
+}
+// Instanciation d'une tâche
+$task = new Task("Faire les courses", "Acheter du lait, du pain et des œufs.");
+// Affichage des infos de la tâche
+echo "<h2>Avant modification:</h2>";
+$task->display();
+// Marquage de la tâche comme terminee
+$task->markAsDone();
+echo "<h2>Après modification:</h2>";
+// Affichage des infos de la tâche
+$task->display();
+
 
